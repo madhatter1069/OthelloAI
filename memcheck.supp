@@ -1,0 +1,21 @@
+{
+    libstdcpp-leak
+    Memcheck:Leak
+    match-leak-kinds: reachable
+    fun:malloc
+    ...
+    fun:call_init.part.0
+    fun:call_init
+    fun:_dl_init
+    ...
+}
+
+{
+    reachable-exception-global-state
+    Memcheck:Leak
+    match-leak-kinds: reachable
+    ...
+    fun:__cxa_get_globals
+    ...
+}
+

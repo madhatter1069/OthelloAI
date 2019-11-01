@@ -1,0 +1,6 @@
+/home/ics46/projects/proj2/out/CMakeFiles/edit_cache.dir
+/home/ics46/projects/proj2/out/CMakeFiles/rebuild_cache.dir
+/home/ics46/projects/proj2/out/CMakeFiles/othelloaistudent.dir
+/home/ics46/projects/proj2/out/CMakeFiles/a.out.app.dir
+/home/ics46/projects/proj2/out/CMakeFiles/a.out.exp.dir
+/home/ics46/projects/proj2/out/CMakeFiles/a.out.gtest.dir

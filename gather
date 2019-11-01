@@ -1,0 +1,68 @@
+#!/bin/bash
+
+
+set -e
+
+
+SCRIPT_DIR=$(readlink -m $(dirname $0))
+TARGZ_PATH=$SCRIPT_DIR/project2.tar.gz
+
+
+if [ ! -e $SCRIPT_DIR/out/bin/a.out.app ]; then
+    echo "WARNING: It looks like this project has not been built successfully"
+    echo "since it was last changed.  Your best bet is to run this command"
+    echo "to make sure it builds successfully before submitting your project:"
+    echo
+    echo "    ./build"
+    echo
+    echo "But if you know that your program does not build successfully"
+    echo "and you still want to gather your files, that's fine.  Just be"
+    echo "sure you're aware of the problem."
+    echo
+    echo
+fi
+
+
+echo "Gathering your source and header files for submission..."
+
+cd $SCRIPT_DIR
+
+
+TEMP_DIR=$(mktemp -d)
+trap cleanup exit
+
+function cleanup()
+{
+    if [ -e $TEMP_DIR ]; then
+        rm -rf $TEMP_DIR
+    fi
+}
+
+
+cp -r $SCRIPT_DIR/app $TEMP_DIR
+cp -r $SCRIPT_DIR/exp $TEMP_DIR
+cp -r $SCRIPT_DIR/core $TEMP_DIR
+cp -r $SCRIPT_DIR/gtest $TEMP_DIR
+
+
+if [ -e $SCRIPT_DIR/.template ]; then
+    cp $SCRIPT_DIR/.template $TEMP_DIR
+fi
+
+
+# Delete vim swap files
+find $TEMP_DIR -name *.swp -delete
+find $TEMP_DIR -name *.swo -delete
+
+# Delete emacs backup and auto-save files
+find $TEMP_DIR -name '*~' -delete
+find $TEMP_DIR -name "#*#" -delete
+
+# Delete nano temp files
+find $TEMP_DIR -name *.save -delete
+find $TEMP_DIR -name *.save.* -delete
+
+
+cd $TEMP_DIR
+tar cvfz $TARGZ_PATH *
+
